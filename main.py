@@ -112,4 +112,4 @@ def invalid_route(e):
 @app.errorhandler(500)
 def internal_error(error):
     return """<!DOCTYPE html><html><head><meta><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><style type="text/css" media="all">body{ padding: 1rem 2rem; }</style><title>500</title></head><body><pre><code style="font-size: 0.8rem;line-height: 25px">{<br>    <span style="color: green; font-weight: bold;">"errorCode" </span>: <span style="color: #820bff;"><strong>404</strong></span>,<br>    <span style="color: green; font-weight: bold;">"reason" </span>: <span style="color: blue;">"invalidTag"</span>,<br>    <span style="color: green; font-weight: bold;">"massage" </span>: <span style="color: blue;">"Invalid ClanTag: Enter a valid ClanTag"</span><br>}</code></pre></body></html>"""
-app.run(debug=True)
+app.run(debug=False,host="0.0.0.0")
