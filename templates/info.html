@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="static/css/info.css" type="text/css" media="all" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <style type="text/css" media="all">
+      *{
+          margin: 0;
+          padding: 0;
+          outline: 0;
+      }
+      
+      .liDiv1{
+          display: flex;
+      }
+      .liDiv2{
+          margin-bottom: 5px;
+      }
+      
+      .Members{
+          padding: 4px 15px;
+          background: #bababa9d;
+          border-radius: 5px;
+          font-size: 0.7rem;
+      }
+      
+      .cPoints{
+          background: #e2c45a;
+          padding: 8px 10px;
+          font-weight: bold;
+          color: #fff;
+          border-radius: 5px;
+          
+      }
+      
+      .ASButton svg{
+          transition: transform 0.4s;
+      }
+
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <!-- Image and text -->
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      Search Result
+    </a>
+  </div>
+</nav>
+
+
+    <ul class="list-group list-group-flush">
+        {%  for cInfo in data["items"]  %}
+        <li class="list-group-item">
+          <form action="/clan/info" method="post" accept-charset="utf-8">
+            <div style="display: flex;justify-content: space-between;align-items:center">
+                <div>
+                <button class="formBtn" type="sunmmit" style="background-color: transparent;border: none;">
+                  <a>
+                    <div class="liDiv1">
+                      <img style="margin-right: 10px" src="{{  cInfo['badgeUrls']['small']  }}" width="40" height="40"/>
+                      <div>
+                          <p style="line-height: 20px"><strong>{{  cInfo['name']  }}</strong> <br />
+                          <small style="color : #5d5d5d">{{  cInfo['tag']  }}&nbsp;&nbsp;|&nbsp;&nbsp;{{  cInfo['type']  }}</small>
+                          </p>
+                      </div>
+                  </div>
+                  </a>
+                </button>
+            <div class="liDiv2">
+                <small style="margin: 0 20px">
+                       Members: <br />
+                       <span class="Members" style="margin-left: 20px">{{  cInfo['members']  }} / 50</span>
+                </small>
+                <span class="cPoints">{{ cInfo['clanPoints'] }} <img src="https://cdn.royaleapi.com/static/img/ui/trophy.png?t=6f676365c" width="25" height="25"/></span>
+            </div>
+            </div>
+            
+                <input type="hidden" name="clanTag" id="clanTag" value="{{  cInfo['tag']  }}" /><a href="#">
+                <button class="btn" type="submit"><svg style="font-weight: bold" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg></button></a>
+            
+            </div>
+          </form>
+        </li>
+    
+            {%  endfor  %}
+            <br>
+            <p id="notFound" style="text-align: center;font-weight: 600;font-size: 1.3em;">Your search - {{clanTag}} - did not match any documents.
+            <pre id="Suggestions" style="text-align: center;">
+Suggestions:
+
+Make sure that all words are spelled correctly.
+Try different name or tag.
+            </pre>
+            </p>
+    </ul>
+    <script>
+      let  notFound = document.querySelector("#notFound");
+      let li = document.querySelector("li");
+      if (li) {
+        notFound.style.display = "none";
+        Suggestions.style.display = "none";
+      }
+      
+      else{
+        notFound.style.display = "block";
+        Suggestions.style.display = "block";
+      }
+
+
+    </script>
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+
+</body>
+</html>
